@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Service</title>
+  <style>
+  
+/* ======================= GLOBAL STYLES & BASE SETUP ======================= */
+body {
+    font-family: Hangyaboly;
+    margin: 0;
+    background-color: #FFFFF0; 
+  font-weight: 600;
+  border: none;
+}
+
+main {
+    padding: 20px 50px;
+}
+
+h2 {
+	text-align: center;
+    font-size: 38px;
+    margin-bottom: 30px;
+    color: #2D392B;
+}
+
+.contained-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+}
+/* ======================= BREADCRUMB ======================= */
+.breadcrumb {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 20px 10px; 
+    font-size: 0.9em;
+    border-bottom: 1px solid #eee;
+    z-index: 999;
+    clear: both;
+    display: flex; 
+    align-items: center;
+}
+
+.breadcrumb a,
+.breadcrumb span {
+    color: #888;
+    text-decoration: none;
+    padding: 0 5px; 
+    white-space: nowrap;    
+}
+
+.breadcrumb a:hover {
+    color: rgba(158, 188, 138, 0.9);
+    text-decoration: underline;
+}
+
+.breadcrumb a + a::before{
+ content: '>';
+    padding: 0 10px; 
+    color: #ccc;
+}
+.breadcrumb a + span::before {
+    padding: 0 10px; 
+    color: #ccc;
+}
+
+.breadcrumb span {
+    font-weight: bold;
+    color: #333; 
+}
+  
+/* ======================= HEADER / NAVBAR =======================*/
+.top-nav {
+    display: flex;
+	justify-content: flex-start;
+	align-items: center;
+    padding: 15px 30px;
+    background-color: rgba(158, 188, 138, 0.9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    gap: 40px; 
+	
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo-image {
+ 	width: 180px; 
+    height: 70px;
+	object-fit: cover;
+    display: block;
+}
+
+.top-nav ul {
+    list-style: none; 
+    margin: 0;
+    padding: 0;
+    flex-grow: 0;
+    display: flex; 
+    gap: 50px;
+}
+
+.top-nav li a {
+    text-decoration: none;
+    color: #2D392B;
+    font-size: 18px;
+    padding: 5px 0; 
+}
+
+/* ======================= FORM CONTAINER ======================= */
+.form-page-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 120px 20px 60px;
+}
+
+/* Main form box*/
+.form-container {
+  background: #fff;
+  border: 1px solid #e2e6df;
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.07);
+  padding: 35px 30px 40px;
+}
+
+/* Form title */
+.form-container h2 {
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  color: #2D392B; 
+}  
+
+.form-group {
+  margin-bottom: 18px; 
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #2D392B;
+}
+
+/* fields */
+.form-group input[type="text"],
+.form-group input[type="file"],
+.form-group textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 15px;
+  padding: 12px 14px;
+  border: 1px solid #cfd6cc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  outline: none;
+  background-color: #fff;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="file"]:focus,
+.form-group textarea:focus {
+  border-color: rgba(158, 188, 138, 0.9);
+  box-shadow: 0 0 6px rgba(158, 188, 138, 0.3);
+}
+
+/*Description box*/
+textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+/* submit button */
+.form-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn.submit-btn {
+  padding: 12px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn.submit-btn:hover {
+ background-color:rgba(158, 188, 138, 0.9); color:#2D392B;
+}
+
+/* ======================= UPLOAD AREA =======================*/
+input[type="file"] {
+  padding: 10px;
+  border: 2px dashed #cfd6cc;
+  background-color: #f9faf8;
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+  background-color: rgba(158, 188, 138, 0.9);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #a5c08a;
+}
+/* ===== Upload Photo Box ===== */
+.upload-box {
+  margin-bottom: 25px;
+}
+
+.upload-area {
+  width: 100%;
+  max-width: 400px;
+  height: 100%px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  margin-top: 8px;
+  position: relative;
+  text-align: center;
+  padding: 40px;
+}
+
+.upload-area:hover {
+  border-color:#b3b3b3 ;
+  background-color:#f2f2f2;
+}
+
+.upload-area p {
+  color: #777;
+  font-size: 0.95em;
+  margin-top: 10px;
+}
+
+.upload-icon {
+  width: 50px;
+  opacity: 0.6;
+}
+
+.upload-area input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/*======================= FOOTER ======================= */
+footer {
+    background-color: #2D392B; 
+    padding: 15px 50px 5px; 
+    text-align: center;
+    margin-top: 70px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around; 
+    align-items: flex-start;
+    padding-bottom: 10px; 
+    border-bottom: 1px solid #777;
+    text-align: left;
+    font-size: 14px; 
+}
+
+.contact-title, 
+.social-media p, 
+.sitemap-link a { 
+    font-weight: bold;
+	font-size: 15px;
+    color: #F1E5B3; 
+    margin: 0 0 8px 0;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-list li {
+    color: #F1E5B3;
+    font-size: 13px;
+    margin-bottom: 8px;
+    padding-left: 25px;
+    position: relative;
+	
+	background-size: 18px 18px;
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+#contact-email {
+    background-image: url(images/MailIcon.png);
+}
+
+#contact-phone {
+    background-image: url(images/PhoneIcon.png); 
+}
+
+.social-media {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 150px; 
+}
+
+.social-icons-img {
+    width: 65px; 
+    height: auto; 
+    display: block;
+}
+
+.copyright {
+    margin-top: 5px;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.6);
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== HEADER / NAVBAR ===== -->
+  <header>
+  <nav class="top-nav">
+            <div><a href="index.html"><img src="images/LogoB.png" alt="Hayyhum Logo" class="logo-image"></a></div>
+            <ul>
+                <li><a href="index.html">Home Page</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="CustomerDashboard.html">Customer Dashboard</a></li>
+                <li><a href="ProviderDashboard.html">Service Provider Dashboard</a></li>
+            </ul>
+        </nav>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="breadcrumb">
+      <a href="index.html">Home Page</a> 
+      <a href="ProviderDashboard.html">Service Provider Dashboard</a> >
+      <span>Add New Service</span>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="form-page-main">
+    <div class="form-container">
+      <h2>Add New Service Form</h2>
+
+      <form action="#" method="POST" enctype="multipart/form-data">
+
+        <div class="form-group">
+          <label for="service-name">Service name*</label>
+          <input type="text" id="service-name" name="service-name" placeholder="Enter service name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="service-price">Service price*</label>
+          <input type="text" id="service-price" name="service-price" placeholder="Enter service price e.g. 2500" required>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Request Description*</label>
+          <textarea id="description" name="description" rows="5" placeholder="Please provide details about your request..." required></textarea>
+        </div>
+
+        <div class="form-group upload-box">
+          <label for="service-photo">Upload photo*</label>
+		  <div class="upload-area">
+		  <img src="images/upload-image-icon.png" alt="Upload Icon" class="upload-icon">
+		  <p>Upload Your Photo</p>
+          <input type="file" id="service-photo" name="service-photo" accept="image/*" required>
+         </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn submit-btn">Add New Service</button>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  
+<footer>
+    <div class="footer-container">
+        <div class="footer-logo"><a href="index.html"><img src="images/Logo2.jpg" alt="Hayyhum Logo" class="logo-image"></a></div>
+        
+        <div class="footer-links">
+            <h3 class="contact-title">Contact Us</h3>
+			<ul class="contact-list">
+				<li id="contact-email">Hayyhum@gmail.com</li>
+				<li id="contact-phone">+966 55 821 2025</li>
+			</ul>
+        </div>
+
+        <div class="social-media">
+            <p>Social Media</p>
+			<img src="images\SocialIcons1.png" alt="Social Media Icons" class="social-icons-img">
+        </div>
+		
+		<div class="sitemap-link">
+            <p><a href="images\sitemap.jpg">Site Map</a></p>
+        </div>
+		
+    </div>
+    <div class="copyright">
+        <p>Copyrights ©2025 All rights reserved. Hayyhum</p>
+    </div>
+</footer>
+</body>
+</html>
